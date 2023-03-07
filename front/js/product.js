@@ -22,7 +22,6 @@ function getDatas()
 
 
 //récupération des produits 
-
 function getProducts()
 
 { 
@@ -63,35 +62,44 @@ async function displayProducts ()
 
 displayProducts(); // affichage du produit
 
-
-
 // selection des donnees  
 let addToCart = document.getElementById("addToCart");
 let color = document.getElementById("colors"); 
 let quantity = document.getElementById("quantity"); 
 
-// creation du panier 
-
-let cart = []; 
 
 function array() {
+  let clePanier = "panier";
+let cart = JSON.parse(localStorage.getItem(clePanier)); //obtenir les éléments du panier
 
-  cart = [
-    {     id : take_Id,
-          couleur : color.value,
-          quantite : parseInt(quantity.value),  // transformer un string en number
-        }
-  ];
- localStorage.setItem("produit", JSON.stringify(cart))
+// creation du panier 
+const sofaToAdd = {
+       id : take_Id,
+    couleur : color.value,
+    quantite : parseInt(quantity.value),  // transformer un string en number
+}
+
+if (cart === null) {  // si local storage ne renvoie rien, ajout du panier
+  cart = [sofaToAdd];
+}
+else { 
+let sofa =  cart.find((sofa)=> sofa.couleur === sofaToAdd.couleur && sofa.id=== sofaToAdd.id)
+ if (sofa === undefined) { // si aucune correspondance n'est trouvé ajout au panier du prouit
+  cart.push(sofaToAdd);
+ }
+ else {
+sofa.quantite+= sofaToAdd.quantite; // sinon simple modification de la quantité
+ }
+}
+  
+ localStorage.setItem(clePanier, JSON.stringify(cart)) // le local storage n'admet qu'un objet JSON
  return cart 
 }
 
-
-
-// ajout ou non du ou des produits 
+// selection des donnees
 function selectDatas() {
 
-  if (color.value == null || color.value == '' )  { 
+  if (color.value == null || color.value == '')  { 
     alert("Choose a color or quantity");
   }
   
@@ -109,81 +117,6 @@ console.log(storage);
 
 // l'evenement click 
 addToCart.addEventListener("click",selectDatas) 
-
-
-
-// stockage des données dans le local Storage
-
-// class Product {
-
-//   _id =''
-//   color = ''
-//   quantity = 0
-
-//   constructor (id,color,quantity) {
-//       this.id = id;
-//       this.color = color;
-//       this.quantity = quantity
-//   }
-// }
-
-// let clickCard = document.getElementById("addTocart");
-// clickCard.addEventListener('click', clickOnCard); 
-
-// let cart = [];
-// function clickOnCard () {
-
-// let quantity = Number(document.getElementById("quantity").value);
-
-
-// if (quantity < 1 || quantity > 100) {
-//   alert("Veuillez choisir une quantité entre 1 et 100");
-//   document.getElementById.value = 1;
-//   return 
-// }
-
-// const colorSelectValue = selectcolor.options[colorSelectValue.selectedIndex].value;
-
-// if (!colorSelectValue) {
-//   alert("choisissez une couleur parmi celles proposées")
-//   return 
-// }
-
-// const product = new Product(take_id, colorSelectValue, quantity)
-// const local = JSON.parse(localStorage.getIdem("cart"));
-
-// if (local == null) {
-//   cart.push(product)
-//   alert("produit ajouté au panier")
-// }
-
-// else {
-//   if (cart.length ==0)
-//   cart = local
-// }
-
-// const indexOfFoundProduct = cart.findIndex(product=> product.id === take_id && product.color === colorSelectValue) 
-//   if (indexOfFoundProduct >-1) {
-//       cart [indexOfFoundProduct].quantity += quantity
-//       alert("Quantité ajouté au panier")
-//   }
-
-// else {
-// cart.push(product);
-// alert("produit ajouté au panier")
-// }
-// }
-
-// localStorage.setItem("cart", JSON.stringify(cart))
-
-
-
-
-
-
-
-
-
 
 
 
