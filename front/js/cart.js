@@ -2,93 +2,73 @@
 
 // 1- récupérer les datas du local Storage
 
-function datasFromStorage() {
-    for( let i = 0; i < localStorage.length; i++){
-        console.log(localStorage.getItem("panier"))
-}
+
+function getCart() {
+let panier = JSON.parse(localStorage.getItem("panier"));
+return panier
 }
 
-datasFromStorage();
+const panier = getCart();
 
-// selection de la section
+for (const article of panier) {
+    console.log(article)
+     fetch(`http://localhost:3000/api/products/${article.id}`)
+    .then (res=> res.json()) //reponse au format Json
+    .then(detailsArticle=> { 
+        console.log(detailsArticle);
+        
 let section = document.getElementById("cart__items");
 console.log(section);
 
-//creation de article
 let createArticle = document.createElement("article");
-createArticle.className = "cart__item";
-createArticle.setAttribute("data-id","{product-ID}");
-createArticle.setAttribute("data-color","product-color")
-
-//ajout de article a la section
-section.append(createArticle);
-
-//selectionner l'article crée
-let selectArticle = document.querySelector(".cart__item");
+createArticle.classList.add("cart__item") ;
+createArticle.setAttribute("data-id",article.id);
+createArticle.setAttribute("data-color",article.couleur)
 
 //ajout de la div cart__item__img
 let cartItemImg = document.createElement("div");
-cartItemImg.className = "cart__item__img";
-selectArticle.appendChild(cartItemImg);
-
-//selection de cart__item__img
-let selectDiv = document.querySelector(".cart__item__img");
+cartItemImg.classList.add("cart__item__img");
+createArticle.appendChild(cartItemImg);
 
 //creation de l'image dans la div cart__item__img
 let img = document.createElement("img");
-img.src = '';
-img.alt = "Photographie d'un canapé";
+img.src = detailsArticle.imageUrl;
+img.alt = detailsArticle.altTxt;
+cartItemImg.append(img);
 
-//ajout de l'image à la div cart__item__img
-selectDiv.appendChild(img);
-console.log(img)
-
-//creation de la div cart__item__content
 let divCartItemContent = document.createElement("div");
-divCartItemContent.className = "cart__item__content";
+divCartItemContent.classList.add( "cart__item__content");
 
 //ajout de cart__item__content
-selectArticle.append(divCartItemContent);
+createArticle.append(divCartItemContent);
 console.log(divCartItemContent);
 
 //creation de la div cart__item__content__description
 let cartItemContentDescription = document.createElement("div");
-cartItemContentDescription.className = "cart__item__content__description";
+cartItemContentDescription.classList.add("cart__item__content__description");
 
 let h2 = document.createElement("h2");
-h2.textContent ="Nom du produit";
+h2.textContent = detailsArticle.name;
 console.log(h2)
 
 let pColor = document.createElement("p");
-pColor.textContent = "Vert";
+pColor.textContent = article.couleur;
 console.log(pColor)
 
 let pPrice = document.createElement("p");
-pPrice.textContent = "42 Euros";
+pPrice.textContent = detailsArticle.price   + " €";
 console.log(pPrice)
 
-//ajout de cart__item__content__settings
+cartItemContentDescription.append(h2, pColor, pPrice);
+
 let cartItemContentSettings = document.createElement("div");
-cartItemContentSettings.className ="cart__item__content__settings";
+cartItemContentSettings.classList.add("cart__item__content__settings") ;
 console.log(cartItemContentSettings);
-
-
-//ajout de cartItemContent et cartItem Settings à divCartItemContent
-cartItemContentDescription.append(h2,pColor,pPrice);
-divCartItemContent.append(cartItemContentDescription,cartItemContentSettings);
-console.log(cartItemContentDescription);
-console.log(divCartItemContent);
-
-
-// ajout de la div cart__item__content__settings__quantity
 
 let cartItemContentSettingsQuantity = document.createElement("div");
 console.log(cartItemContentSettingsQuantity)
 let paragraphQuantite = document.createElement("p");
 paragraphQuantite.textContent = "Qté :";
-
-
-// creation de l'input 
 
 let input = document.createElement("input");
 input.setAttribute("type", "number");
@@ -96,44 +76,29 @@ input.setAttribute("class", "itemQuantity");
 input.setAttribute("name", "itemQuantity");
 input.setAttribute("min", "1");
 input.setAttribute("max", "100");
-input.setAttribute("value", 42);
+input.setAttribute("value", article.quantite);
 
-//creation de la div cartItemContentSetttingsQuantity
+cartItemContentSettingsQuantity.append(paragraphQuantite, input)
+cartItemContentSettings.append(cartItemContentSettingsQuantity);
+
 let cartItemContentSettingsDelete = document.createElement("div");
 cartItemContentSettingsDelete.className = "cart__item__content__settings__delete";
 console.log(cartItemContentSettingsDelete);
 
 let pDelete = document.createElement("p");
-pDelete.className = "deleteItem";
+pDelete.classList.add("deleteItem");
 pDelete.textContent = "Supprimer";
 cartItemContentSettingsDelete.append(pDelete);
+cartItemContentSettings.append(cartItemContentSettingsDelete);
+
 console.log(pDelete)
 
-cartItemContentSettings.append(cartItemContentSettingsQuantity,cartItemContentSettingsDelete);
-cartItemContentSettingsQuantity.append(paragraphQuantite, input);
+divCartItemContent.append(cartItemContentDescription, cartItemContentSettings)
+section.append(createArticle);
+
+}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 2- parcourir les éléments du localStorage avec une boucle for
-
-
-
-// 3-creer les elements necessaires dans le DOM 
-
-
-
-// 4-inserer les datas du local Storage dans le DOM 
-
+)
+.catch(()=> alert("Désole, il y a une erreur dans l'affichage du produit."))
+}
