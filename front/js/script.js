@@ -6,12 +6,10 @@ function getData()
 { return fetch("http://localhost:3000/api/products")
 
   .then(res=> res.json())
-  .catch(()=> alert("Désolé, revenez plus tard"))
+  .catch(()=> alert("Désolé, revenez plus tard..."))
 }
 
 getData();
-
-
 
 //intégration des données de l'API
 function getSofa(sofas)
@@ -19,7 +17,7 @@ function getSofa(sofas)
 { 
     const section = document.getElementById("items"); 
 
-    for ( let sofa of sofas)
+    for (let sofa of sofas)
 
     {
         const a = document.createElement('a');
@@ -47,17 +45,14 @@ function getSofa(sofas)
         a.appendChild(article);
         
     }
-
 }
 
 //affichage des produits sur la page d'accueil
-async function getProducts () 
 
-{ 
+async function getProducts () 
+{
     const sofas = await getData(); 
     getSofa(sofas)
-
-
 }
 
 getProducts();

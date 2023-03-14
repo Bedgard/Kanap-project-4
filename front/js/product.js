@@ -17,7 +17,7 @@ function getDatas()
 {
   return fetch(`http://localhost:3000/api/products/${take_Id}`)
   .then (res=> res.json()) //reponse au format Json
-  .catch(()=> alert("Désole, il y a une  dans l'affierreurchage du produit.")) // error du serveur
+  .catch(()=> alert("Désole, il y a une erreur dans l'affichage du produit.")) // error du serveur
 }
 
 
