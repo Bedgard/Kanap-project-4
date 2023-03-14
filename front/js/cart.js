@@ -84,6 +84,22 @@ input.setAttribute("min", "1");
 input.setAttribute("max", "100");
 input.setAttribute("value", article.quantite);
 
+// commentaire : voilà ce que j'ai fait 
+
+if( article.id === article.id && article.color === article.color)  {
+    article.quantite = 0;
+} 
+
+else if (article.quantite === 0) {
+        article.quantite += article.quantite;
+    }
+
+    else { 
+        article.quantite
+    }
+
+
+
 cartItemContentSettingsQuantity.append(paragraphQuantite, input)
 cartItemContentSettings.append(cartItemContentSettingsQuantity);
 
