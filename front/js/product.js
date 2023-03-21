@@ -23,7 +23,6 @@ function getDatas()
 
 //récupération des produits 
 function getProducts()
-
 { 
 const divImg = document.getElementsByClassName("item__img") [0];
 let img = document.createElement("img");
@@ -70,13 +69,15 @@ let quantity = document.getElementById("quantity");
 
 function array() {
   let clePanier = "panier";
-let cart = JSON.parse(localStorage.getItem(clePanier)); //obtenir les éléments du panier
+let cart = JSON.parse(localStorage.getItem(clePanier))
+console.log(cart); //obtenir les éléments du panier
 
 // creation du panier 
 const sofaToAdd = {
        id : take_Id,
     couleur : color.value,
-    quantite : parseInt(quantity.value),  // transformer un string en number
+    quantite : parseInt(quantity.value), // transformer un string en number
+    price : sofa.price  
 }
 
 if (cart === null) {  // si local storage ne renvoie rien, ajout du panier
@@ -100,6 +101,7 @@ sofa.quantite+= sofaToAdd.quantite; // sinon simple modification de la quantité
 function selectDatas() {
 
   if (color.value == null || color.value == '')  { 
+
     alert("Choose a color or quantity");
   }
   
@@ -108,17 +110,17 @@ function selectDatas() {
     alert("choose a quantity between 1 and 100");
   }
   else {
+
+    let storage= array();
+    console.log(storage);
     alert("Your(s) product(s) has been added to the card")
  
   }
-let storage= array();
-console.log(storage);
+
 }
 
 // l'evenement click 
 addToCart.addEventListener("click",selectDatas) 
-
-
 
 
 
