@@ -1,7 +1,7 @@
 "use strict";
 
 // récupération des données de l'API
-function getData() 
+function getData()
 
 { return fetch("http://localhost:3000/api/products")
 
@@ -19,7 +19,7 @@ function getSofa(sofas)
 
     for (let sofa of sofas)
 
-    {
+    { 
         const a = document.createElement('a');
         a.href= "./product.html?id=" + sofa._id;
 

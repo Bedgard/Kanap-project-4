@@ -14,7 +14,7 @@ let take_Id;
 
 // récupération l'id 
 function getDatas()
-{
+{ 
   return fetch(`http://localhost:3000/api/products/${take_Id}`)
   .then (res=> res.json()) //reponse au format Json
   .catch(()=> alert("Désole, il y a une erreur dans l'affichage du produit.")) // error du serveur
@@ -68,6 +68,7 @@ let quantity = document.getElementById("quantity");
 
 
 function array() {
+  
   let clePanier = "panier";
 let cart = JSON.parse(localStorage.getItem(clePanier))
 console.log(cart); //obtenir les éléments du panier
@@ -102,7 +103,7 @@ function selectDatas() {
 
   if (color.value == null || color.value == '')  { 
 
-    alert("Choose a color or quantity");
+    alert("Choose a color");
   }
   
   else if (quantity.value == null || quantity.value == 0 || quantity.value > 100) 
