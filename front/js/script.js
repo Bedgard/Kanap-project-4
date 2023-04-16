@@ -34,12 +34,13 @@ function getSofa(sofas) {
         paragraphe.className = "productDescription"; // pourrait-on changer cela en classList.add""?
         paragraphe.innerText = sofa.description;
 
-        article.appendChild(image);  // DRY   // article.appendChild(image, h3, paragraphe) ?
+        article.appendChild(image);  // DRY   // article.append(image, h3, paragraphe) ?
         article.appendChild(h3);
         article.appendChild(paragraphe)
+        a.appendChild(article);
 
         section.appendChild(a);
-        a.appendChild(article);
+
     }
 }
 

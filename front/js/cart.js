@@ -18,7 +18,7 @@ if (panier !== null) {
 
     fetch(`http://localhost:3000/api/products/${article.id}`) // grâce à l'id récupéré du localStorage stocké dans panier(getCart()), on peut cibler le produit correspondant pour récupérer les données du produit
       .then(res => res.json()) //reponse au format Json
-      .then(detailsArticle => { // cette ligne detailsArticle me pose problème : pourquoi avoir de nouveau utilisé une promesse ? ****
+      .then(detailsArticle => {
         price[article.id] = detailsArticle.price // tout d'abord, on ajoute une paire clé / valeur à notre objet "price" vide qui contient en clé l'id et en valeur le prix selectionné. De cette façon on peut donc assigner remplir le DOM 
 
         // création des elements du DOM    
@@ -126,7 +126,7 @@ function priceTotal() {
   let totalPrice = document.getElementById("totalPrice");
   let totalSofa = 0
   panier.forEach(sofa => {
-    totalSofa += sofa.quantite * price[sofa.id] // price [sofa.id] // pas clair *****
+    totalSofa += sofa.quantite * price[sofa.id]
   });
   totalPrice.textContent = totalSofa;
 }
@@ -169,19 +169,45 @@ function save(panier) {
 // le formulaire
 
 //variable globale formulaire
-let formulaire = document.forms;
-console.log(formulaire);
+const form = document.querySelector(".cart__order__form");
+
+// validation des inputs
+function ValidationForm() {
+  const inputs = form.querySelectorAll('input');
+  inputs.forEach((input) => {
+    if (input.value === "") {
+      alert("you forgot to fill in the field(s) necessary to validate your order");
+      return true
+    }
+
+  })
+}
+
+// validation du mail 
+function EmailInvalid() {
+  const mail = document.querySelector("#email").value;
+  const regex = /^[a-zA-Z0-9_!#$%&*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$/;
+  if (regex.test(mail) === false) {
+    alert("Please enter correct Email")
+    return true
+  }
+  return false
+}
 
 // function order
 function submitOrder(e) {
   e.preventDefault() // éviter que la page se rafraîchisse avec e.preventDefault();
   if (panier == null) {
-    alert("Please, select item to complete your order");
-    return // traitement du cas au cas où aucun produit n'a été sélectionné
+
+    return alert("Please, select item to complete your order");     // traitement du cas au cas où aucun produit n'a été sélectionné
   }
 
-  else if (formulaire[0][0].value === "" || formulaire[0][1].value === "" || formulaire[0][2].value === "" || formulaire[0][3].value === "" || formulaire[0][4].value === "") {
-    return alert("you forgot to fill in the field(s) necessary to validate your order");
+  else if (ValidationForm()) {
+    return
+  }
+
+  else if (EmailInvalid()) {
+    return
   }
 
   else {
@@ -203,14 +229,14 @@ function submitOrder(e) {
 
 function collectDataRequest() {
 
-  const form = document.forms; // selection du formulaire dans sa totalité sous de HTML collection
+  let formData = new FormData(form);
+  console.log(formData);
 
-
-  const firstName = form[0][0].value; // selection des values du formulaire 
-  const lastName = form[0][1].value;
-  const address = form[0][2].value;
-  const city = form[0][3].value;
-  const email = form[0][4].value;
+  const firstName = formData.get("firstName"); // selection des values du formulaire 
+  const lastName = formData.get("lastName");
+  const address = formData.get("address");
+  const city = formData.get("city");
+  const email = formData.get("email");
 
   const informations = {
 

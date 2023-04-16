@@ -38,14 +38,13 @@ function getProducts() {
 
   // récupérer les couleurs de l'API
   for (const color of sofa.colors) {
-    let value = document.createElement("option");
-    value.option = color;
-    selectColor.appendChild(value);
-    selectColor.lastElementChild.innerHTML = color; // pourquoi InnerHTML et pas TextContent ?
+    let option = document.createElement("option");
+    option.setAttribute('value', color);
+    option.textContent = color;
+    selectColor.appendChild(option);
   }
 }
 
-// afficher les produits dans la page produit
 async function displayProducts() {
   sofa = await getDatas(); // attente des données de l'API : cela signifie ici que ma variable sofa qui était dans la portée globale contient localement à présent les éléments de getData(), soit le canapé sélectionné
   getProducts();  // les éléments selectionnés à partir du DOM
@@ -55,7 +54,6 @@ displayProducts(); // affichage du produit
 
 // selection des donnees  
 let addToCart = document.getElementById("addToCart");
-let color = document.getElementById("colors"); // redondant ? Je l'ai déjà défini dans la portée globale plus : serait-il plus intelligent de mettre la selection des données en haut pour tout regrouper dans la portée globala ?
 let quantity = document.getElementById("quantity");
 
 
@@ -67,7 +65,7 @@ function array() {
   // creation du panier qui va contenir à la fois l'id, la couleur, et la quantité
   const sofaToAdd = {
     id: take_Id,
-    couleur: color.value,
+    couleur: selectColor.value,
     quantite: parseInt(quantity.value), // transformer un string en number avec ParseInt ; on aurait pu utiliser aussi Number();
   }
   // gestion des cas possibles dans l'ajout d'une élément au panier
@@ -96,7 +94,7 @@ function array() {
 // selection des donnees
 function selectDatas() {
 
-  if (color.value == null || color.value == '') { // si la couleur est null ou si la couleur est vide
+  if (selectColor.value == null || selectColor.value == '') { // si la couleur est null ou si la couleur est vide
 
     alert("Choose a color");
   }
