@@ -186,7 +186,7 @@ function ValidationForm() {
 // validation du mail 
 function EmailInvalid() {
   const mail = document.querySelector("#email").value;
-  const regex = /^[a-zA-Z0-9_!#$%&*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$/;
+  const regex = /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/;
   if (regex.test(mail) === false) {
     alert("Please enter correct Email")
     return true
