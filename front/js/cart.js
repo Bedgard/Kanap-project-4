@@ -186,7 +186,7 @@ function ValidationForm() {
 // validation du mail 
 function EmailInvalid() {
   const mail = document.querySelector("#email").value;
-  const regex = /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/;
+  const regex = /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/; // introduction du regex pour valider le mail
   if (regex.test(mail) === false) {
     alert("Please enter correct Email")
     return true
@@ -202,11 +202,11 @@ function submitOrder(e) {
     return alert("Please, select item to complete your order");     // traitement du cas au cas où aucun produit n'a été sélectionné
   }
 
-  else if (ValidationForm()) {
+  else if (ValidationForm()) { // traitement du cas où un des input n'est pas bon
     return
   }
 
-  else if (EmailInvalid()) {
+  else if (EmailInvalid()) { // traitement du cas où le mail n'est pas bon 
     return
   }
 
@@ -222,7 +222,14 @@ function submitOrder(e) {
 
       })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        const orderId = data.orderId;
+        console.log(orderId)
+        window.location.href = "/html/confirmation.html" + "?orderId=" + orderId;
+        return console.log(data)
+      })
+
+
     alert("Your order has been dispatched") // messag de confirmation pour alerter que la commande a été envoyée
   }
 };
