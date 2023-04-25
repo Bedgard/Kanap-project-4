@@ -6,14 +6,14 @@ function getData() {
     return fetch("http://localhost:3000/api/products") // la fonction getData() va nous retourner les elements de l'API. Il faudra donc la stocker dans une autre fonction ou l'appeler pour l'utiliser
 
         .then(res => res.json())
-        .catch(() => alert("Désolé, revenez plus tard...")) // catch permet la gestion de l'erreur ( try / catch ou throw New Error avec default dans un switch)
+        .catch(() => alert("Désolé, revenez plus tard...")) // catch permet la gestion de l'erreur 
 }
 
 getData();
 
 //intégration des données de l'API
 function getSofa(sofas) {
-    // est-ce que je n'aurais pas pu ici intégrer directement getData() dans une constante ?
+
     const section = document.getElementById("items");
 
     for (let sofa of sofas) {
@@ -27,14 +27,14 @@ function getSofa(sofas) {
         image.alt = sofa.altTxt;
 
         const h3 = document.createElement("h3");
-        h3.className = "productName"; // peut-on changer cela en classList.add ""?
+        h3.classList.add("productName");
         h3.innerText = sofa.name;
 
         const paragraphe = document.createElement("p");
-        paragraphe.className = "productDescription"; // pourrait-on changer cela en classList.add""?
+        paragraphe.classList.add("productDescription");
         paragraphe.innerText = sofa.description;
 
-        article.appendChild(image);  // DRY   // article.append(image, h3, paragraphe) ?
+        article.appendChild(image);
         article.appendChild(h3);
         article.appendChild(paragraphe)
         a.appendChild(article);

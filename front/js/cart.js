@@ -171,16 +171,18 @@ function save(panier) {
 //variable globale formulaire
 const form = document.querySelector(".cart__order__form");
 
-// validation des inputs
-function ValidationForm() {
-  const inputs = form.querySelectorAll('input');
-  inputs.forEach((input) => {
-    if (input.value === "") {
-      alert("you forgot to fill in the field(s) necessary to validate your order");
-      return true
-    }
 
-  })
+function formIsNotValid(form) {
+  let error = false;
+
+  for (const [id, value] of form) {
+    if (value === "") {
+      let errorMsg = document.getElementById(`${id}ErrorMsg`)
+      errorMsg.textContent = "ceci est une erreur";
+      error = true;
+    }
+  }
+  return error
 }
 
 // validation du mail 
@@ -188,7 +190,8 @@ function EmailInvalid() {
   const mail = document.querySelector("#email").value;
   const regex = /^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$/; // introduction du regex pour valider le mail
   if (regex.test(mail) === false) {
-    alert("Please enter correct Email")
+    let emailError = document.getElementById("emailErrorMsg");
+    emailError.textContent = "ceci est une erreur";
     return true
   }
   return false
@@ -202,16 +205,19 @@ function submitOrder(e) {
     return alert("Please, select item to complete your order");     // traitement du cas au cas où aucun produit n'a été sélectionné
   }
 
-  else if (ValidationForm()) { // traitement du cas où un des input n'est pas bon
+
+  let formData = new FormData(form);
+
+  if (formIsNotValid(formData)) { // traitement du cas où un des input n'est pas bon
     return
   }
 
-  else if (EmailInvalid()) { // traitement du cas où le mail n'est pas bon 
+  if (EmailInvalid()) { // traitement du cas où le mail n'est pas bon 
     return
   }
 
   else {
-    const body = collectDataRequest(); // stockage des données de CollectDataRequest() dans la variable body
+    const body = collectDataRequest(formData); // stockage des données de CollectDataRequest() dans la variable body
     fetch(`http://localhost:3000/api/products/order`,
       {
         method: "POST", // avec Fetch, il existe plusieurs méthodes. Get pour obtenir des données du serveur, et POST pour envoyer des données au serveur
@@ -234,10 +240,7 @@ function submitOrder(e) {
   }
 };
 
-function collectDataRequest() {
-
-  let formData = new FormData(form);
-  console.log(formData);
+function collectDataRequest(formData) {
 
   const firstName = formData.get("firstName"); // selection des values du formulaire 
   const lastName = formData.get("lastName");
