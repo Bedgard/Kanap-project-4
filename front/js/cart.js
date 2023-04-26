@@ -170,12 +170,14 @@ function save(panier) {
 
 //variable globale formulaire
 const form = document.querySelector(".cart__order__form");
+console.log(form);
 
 
 function formIsNotValid(form) {
   let error = false;
 
   for (const [id, value] of form) {
+    debugger
     if (value === "") {
       let errorMsg = document.getElementById(`${id}ErrorMsg`)
       errorMsg.textContent = "ceci est une erreur";
@@ -221,7 +223,7 @@ function submitOrder(e) {
     fetch(`http://localhost:3000/api/products/order`,
       {
         method: "POST", // avec Fetch, il existe plusieurs méthodes. Get pour obtenir des données du serveur, et POST pour envoyer des données au serveur
-        headers: { // au début, je n'ai pas mis les headers, et je me demande pourquoi faut-il les mettre ? ****
+        headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(body),     // stringifijer les éléments de DataRequest
@@ -236,7 +238,7 @@ function submitOrder(e) {
       })
 
 
-    alert("Your order has been dispatched") // messag de confirmation pour alerter que la commande a été envoyée
+    alert("Your order has been dispatched") // message de confirmation pour alerter que la commande a été envoyée
   }
 };
 
@@ -251,13 +253,13 @@ function collectDataRequest(formData) {
   const informations = {
 
     contact: {
-      firstName: firstName, // insertion des value du formulaire dans l'objet informations
+      firstName: firstName, // insertion des values du formulaire dans l'objet informations
       lastName: lastName,
       address: address,
       city: city,
       email: email
     },
-    products: getIdOfStorage() // appel de la fonction getIdOfStorage() qui récupère les produits correspondants sélectionnés 
+    products: getIdOfStorage() // appel de la fonction getIdOfStorage() qui récupère les produits correspondants sélectionnés dans le panier
   }
   return informations
 }
