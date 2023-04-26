@@ -200,7 +200,7 @@ function EmailInvalid() {
 // function order
 function submitOrder(e) {
   e.preventDefault() // éviter que la page se rafraîchisse avec e.preventDefault();
-  if (panier == null) {
+  if (panier === "") {
 
     return alert("Please, select item to complete your order");     // traitement du cas au cas où aucun produit n'a été sélectionné
   }
