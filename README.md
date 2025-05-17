@@ -1,6 +1,6 @@
 # 🛋️ Kanap — E-commerce Sofa Store
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript Logo" width="40" />
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript Logo" width="100" />
 
 
 > **Project 5 – OpenClassrooms Web Developer Path**
