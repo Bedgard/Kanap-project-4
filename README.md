@@ -3,7 +3,7 @@
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript Logo" width="150" />
 
 
-Kanap is a stylish furniture brand aiming to go digital. This project challenges you to build the entire dynamic part of their new e-commerce website using **only vanilla JavaScript** — no frameworks or external libraries.
+Kanap is a stylish furniture brand aiming to go digital. This project challenges you to build the entire dynamic part of their new e-commerce website using **only JavaScript** — no frameworks or external libraries.
 
 You are responsible for creating a fully functional shopping experience: managing a product catalog, a shopping cart, and submitting orders via a custom backend.
 
