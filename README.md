@@ -2,7 +2,6 @@
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript Logo" width="150" />
 
-> **Project 5 – OpenClassrooms Web Developer Path**
 
 Kanap is a stylish furniture brand aiming to go digital. This project challenges you to build the entire dynamic part of their new e-commerce website using **only vanilla JavaScript** — no frameworks or external libraries.
 
