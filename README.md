@@ -1,15 +1,43 @@
-# Kanap #
+# 🛋️ Kanap — E-commerce Sofa Store
 
-This is the front end and back end server for Project 5 of the Web Developer path.
+![JavaScript Logo](https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png)
 
-### Back end Prerequisites ###
+> **Project 5 – OpenClassrooms Web Developer Path**
 
-You will need to have Node and `npm` installed locally on your machine.
+Kanap is a stylish furniture brand looking to go digital. This project challenges you to build the entire dynamic part of their new e-commerce website using **only vanilla JavaScript** — no frameworks or external libraries.
 
-### Back end Installation ###
+You are responsible for creating a fully functional shopping experience: managing a product catalog, a shopping cart, and submitting orders via a custom backend.
 
-Clone this repo. From the "back" folder of the project, run `npm install`. You 
-can then run the server with `node server`. 
-The server should run on `localhost` with default port `3000`. If the
-server runs on another port for any reason, this is printed to the
-console when the server starts, e.g. `Listening on port 3001`.
+---
+
+## 📦 Project Summary
+
+You're joining a web development agency and have already proven your skills with HTML/CSS projects. Now, it's time to take on something bigger.
+
+Your mission: **Develop the frontend logic** (JavaScript) for Kanap's online shop. The HTML and CSS are already designed.
+
+### 🧱 You will build:
+- A dynamic product listing using API data
+- A shopping cart that persists with LocalStorage
+- Form validation and error messages
+- A final confirmation page showing the **order ID**
+
+---
+
+## ⚙️ Back End Setup
+
+This repo contains both the frontend files and the backend API.
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/)
+- npm (usually comes with Node.js)
+
+### Installation Instructions
+
+1. Clone the repository.
+2. Navigate to the `/back` folder.
+3. Install dependencies:
+   ```bash
+   npm install
+
